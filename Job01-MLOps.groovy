@@ -14,7 +14,7 @@ pipeline {
       post {
         always{
             script {
-                sh 'ls ./src'
+                sh 'ls'
             }
             
         }
