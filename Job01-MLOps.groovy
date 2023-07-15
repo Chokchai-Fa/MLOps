@@ -14,7 +14,7 @@ pipeline {
         stage('Pull Image'){
             steps{
                 script{
-                    sh 'docker pull chokchaifa/hellogo:latest'
+                    docker.image('chokchaifa/hellogo:latest').pull()
                 }
             }
         }
