@@ -23,7 +23,7 @@ pipeline {
             steps{
                 script{
                        docker.withDockerServer() {
-                        sh 'docker run -d -p 3000:8080 chokchaifa/hellogo:latest'
+                        def dockerContainer = docker.image('chokchaifa/hellogo:latest').run()
                     }
                 }
                 
