@@ -14,7 +14,7 @@ pipeline {
         stage('Pull Image'){
             steps{
                 script{
-                    sh 'sudo usermod -aG docker jenkins'
+                    sh 'usermod -aG docker jenkins'
                     docker.image('chokchaifa/hellogo:latest').pull()
                 }
             }
