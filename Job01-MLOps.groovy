@@ -33,10 +33,11 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                    def previousContainerIds = sh(returnStdout: true, script: 'docker ps -aqf "ancestor=chokchaifa/hellogo:latest"')
-                    def ids = previousContainerIds.trim().split()
-                    ids.each { id ->
-                        sh "docker stop $id"
+                    def containerName = 'hello-go'
+                    def existingContainerId = sh(returnStdout: true, script: "docker ps -aqf \"name=${containerName}\"").trim()
+                    if (!existingContainerId.isEmpty()) {
+                        sh "docker stop ${existingContainerId}"
+                        sh "docker rm ${existingContainerId}"
                     }
                     docker.image('chokchaifa/go-hello:latest').run('--name hello-go -d -p 3000:8080')
                 }
