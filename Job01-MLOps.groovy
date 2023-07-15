@@ -6,7 +6,7 @@ pipeline {
             steps{
                 sh 'pwd'
                 dir('src'){
-                     git 'https://github.com/Chokchai-Fa/banking-go'
+                     sh 'git clone https://github.com/Chokchai-Fa/banking-go'
                 }
             }
         }
