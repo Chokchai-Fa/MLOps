@@ -10,7 +10,10 @@ pipeline {
         }
     post {
         always{
-            sh 'ls ./src'
+            script {
+                sh 'ls ./src'
+            }
+            
         }
     }
     }
