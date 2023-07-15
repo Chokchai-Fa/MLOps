@@ -33,7 +33,8 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                       docker.image('chokchaifa/go-hello:latest').run('-d -p 3000:8080')
+                        sh 'docker stop hello-go'
+                       docker.image('chokchaifa/go-hello:latest').run('--name hello-go -d -p 3000:8080')
                     }
                 }
                 
