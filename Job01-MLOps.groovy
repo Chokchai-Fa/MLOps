@@ -9,7 +9,7 @@ pipeline {
                 }
             }
         }
-        stage('Build Image and Push Image'){
+        stage('Build Image and Push Image to Regisrty'){
             steps{
                    dir('src/go-hello'){
                     script{
