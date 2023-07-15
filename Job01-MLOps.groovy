@@ -21,9 +21,12 @@ pipeline {
 
         stage('Deploy'){
             steps{
-                   docker.withDockerServer() {
+                script{
+                       docker.withDockerServer() {
                         def dockerContainer = docker.image('chokchaifa/hellogo:latest').run()
                     }
+                }
+                
             }
         }
   
