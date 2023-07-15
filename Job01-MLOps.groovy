@@ -1,10 +1,5 @@
 pipeline {
-    agent{
-         docker {
-            image 'jenkins/jenkins'
-            args '-v /var/run/docker.sock:/var/run/docker.sock -u root'
-        }
-    } 
+    agent any
 
     stages{
         stage('Pull Code') {
@@ -19,7 +14,7 @@ pipeline {
         stage('Pull Image'){
             steps{
                 script{
-                    docker.image('chokchaifa/hellogo:latest').pull()
+                    sh 'docker pull chokchaifa/hellogo:latest'
                 }
             }
         }
@@ -28,7 +23,7 @@ pipeline {
             steps{
                 script{
                        docker.withDockerServer() {
-                        def dockerContainer = docker.image('chokchaifa/hellogo:latest').run()
+                        sh 'docker run -d -p 3000:8080 chokchaifa/hellogo:latest'
                     }
                 }
                 
