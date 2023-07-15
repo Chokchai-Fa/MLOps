@@ -20,7 +20,6 @@ pipeline {
             }
         }
          
-
         stage('Pull Image'){
             steps{
                 script{
