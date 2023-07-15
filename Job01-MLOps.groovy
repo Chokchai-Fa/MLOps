@@ -28,8 +28,8 @@ pipeline {
                 
             }
         }
-  
-    }
+
+    
 
       post {
         always{
