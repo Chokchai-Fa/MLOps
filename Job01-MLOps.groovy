@@ -33,10 +33,13 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                        sh 'docker stop hello-go'
-                       docker.image('chokchaifa/go-hello:latest').run('--name hello-go -d -p 3000:8080')
+                    def previousContainer = docker.image('chokchaifa/go-hello:latest').container('-q', '--filter', "status=running")
+                    if (previousContainer) {
+                        previousContainer.stop()
                     }
+                    docker.image('chokchaifa/go-hello:latest').run('--name hello-go -d -p 3000:8080')
                 }
+            }
                 
             }
         }
