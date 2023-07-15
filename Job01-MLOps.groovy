@@ -33,9 +33,9 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                    def previousContainer = docker.image('chokchaifa/go-hello:latest').container('-q', '--filter', "status=running")
-                    if (previousContainer) {
-                        previousContainer.stop()
+                    def previousContainerId = sh(returnStdout: true, script: 'docker ps -aqf "ancestor=chokchaifa/go-hello:latest"')
+                    if (!previousContainerId.trim().empty) {
+                        sh "docker stop $previousContainerId"
                     }
                     docker.image('chokchaifa/go-hello:latest').run('--name hello-go -d -p 3000:8080')
                 }
