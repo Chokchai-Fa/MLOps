@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                       docker.image('chokchaifa/hellogo:latest').run('-d')
+                       docker.image('chokchaifa/hellogo:latest').run('-d -p 3000:8080')
                     }
                 }
                 
