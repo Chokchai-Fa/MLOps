@@ -4,17 +4,24 @@ pipeline {
     stages{
         stage('Pull Code') {
             steps{
-                sh 'pwd'
                 dir('src'){
                      sh 'git clone https://github.com/Chokchai-Fa/banking-go'
                 }
+            }
+        }
+        stage('Build Image and Push Image'){
+            dir('src/banking-go'){
+                def dockerImage = docker.build('chokchaifa/banking-go', '.')
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        dockerImage.push()
+                    }
             }
         }
 
         stage('Pull Image'){
             steps{
                 script{
-                    docker.image('chokchaifa/hellogo:latest').pull()
+                    docker.image('chokchaifa/banking-go:latest').pull()
                 }
             }
         }
@@ -22,7 +29,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                       docker.image('chokchaifa/hellogo:latest').run('-d -p 3000:8080')
+                       docker.image('chokchaifa/banking-go:latest').run('-d -p 3000:8080')
                     }
                 }
                 
