@@ -5,15 +5,15 @@ pipeline {
         stage('Pull Code') {
             steps{
                 dir('src'){
-                     sh 'git clone https://github.com/Chokchai-Fa/banking-go'
+                     sh 'git clone https://github.com/Chokchai-Fa/go-hello'
                 }
             }
         }
         stage('Build Image and Push Image'){
             steps{
-                   dir('src/banking-go'){
+                   dir('src/go-hello'){
                     script{
-                        def dockerImage = docker.build('chokchaifa/banking-go', '.')
+                        def dockerImage = docker.build('chokchaifa/go-hello', '.')
                         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                             dockerImage.push()
                         }
@@ -25,7 +25,7 @@ pipeline {
         stage('Pull Image'){
             steps{
                 script{
-                    docker.image('chokchaifa/banking-go:latest').pull()
+                    docker.image('chokchaifa/go-hello:latest').pull()
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                       docker.image('chokchaifa/banking-go:latest').run('-d -p 3000:8080')
+                       docker.image('chokchaifa/go-hello:latest').run('-d -p 3000:8080')
                     }
                 }
                 
