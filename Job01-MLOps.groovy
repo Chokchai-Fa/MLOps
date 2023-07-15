@@ -34,10 +34,7 @@ pipeline {
 
       post {
         always{
-            node('any') {
-                cleanWs()
-            }
-            
+          cleanWs()
         }
     }
 
