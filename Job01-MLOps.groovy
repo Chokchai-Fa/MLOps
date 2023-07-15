@@ -10,6 +10,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Pull Image'){
+            steps{
+                script{
+                    docker.image('chokchaifa/hellogo:latest').pull()
+                }
+            }
+        }
+
+        stage('Deploy'){
+            steps{
+                   docker.withDockerServer() {
+                        def dockerContainer = docker.image('chokchaifa/hellogo:latest').run()
+                    }
+            }
+        }
   
     }
 
