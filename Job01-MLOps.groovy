@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent{
+         docker {
+            image 'jenkins/jenkins'
+            args '-v /var/run/docker.sock:/var/run/docker.sock -u root'
+        }
+    } 
 
     stages{
         stage('Pull Code') {
@@ -14,7 +19,6 @@ pipeline {
         stage('Pull Image'){
             steps{
                 script{
-                    sh 'usermod -aG docker jenkins'
                     docker.image('chokchaifa/hellogo:latest').pull()
                 }
             }
