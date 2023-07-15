@@ -2,10 +2,12 @@ pipeline {
     agent any
 
     stages{
-        stage('Build') {
+        stage('Pull Code') {
             steps{
-                git 'https://github.com/Chokchai-Fa/banking-go'
-
+                sh 'pwd'
+                dir('src'){
+                     git 'https://github.com/Chokchai-Fa/banking-go'
+                }
             }
         }
   
