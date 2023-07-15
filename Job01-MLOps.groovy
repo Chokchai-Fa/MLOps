@@ -10,13 +10,16 @@ pipeline {
             }
         }
         stage('Build Image and Push Image'){
-            dir('src/banking-go'){
-                def dockerImage = docker.build('chokchaifa/banking-go', '.')
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        dockerImage.push()
-                    }
+            steps{
+                   dir('src/banking-go'){
+                    def dockerImage = docker.build('chokchaifa/banking-go', '.')
+                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                            dockerImage.push()
+                        }
+            }
             }
         }
+         
 
         stage('Pull Image'){
             steps{
