@@ -1,10 +1,5 @@
 pipeline {
-     agent {
-        docker {
-            image 'docker:dind'
-            args '--privileged --group-add docker'
-        }
-    }
+     agent any
 
     stages{
         stage('Pull Code') {
