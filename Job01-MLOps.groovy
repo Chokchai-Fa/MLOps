@@ -34,10 +34,7 @@ pipeline {
 
       post {
         always{
-            script {
-                sh 'ls'
-            }
-            
+            cleanWs()
         }
     }
 
