@@ -8,7 +8,10 @@ pipeline {
 
             }
         }
-    post {
+  
+    }
+
+      post {
         always{
             script {
                 sh 'ls ./src'
@@ -16,8 +19,6 @@ pipeline {
             
         }
     }
-    }
-
 
 
 }
