@@ -33,13 +33,13 @@ pipeline {
         stage('Deploy Stage'){
             steps{
                 script{
-                    def containerName = 'ml-ops01'
+                    def containerName = 'ml-opstest01'
                     def existingContainerId = sh(returnStdout: true, script: "docker ps -aqf \"name=${containerName}\"").trim()
                     if (!existingContainerId.isEmpty()) {
                         sh "docker stop ${existingContainerId}"
                         sh "docker rm ${existingContainerId}"
                     }
-                    docker.image('chokchaifa/mlops-test:latest').run('-dit --name mlops-test -d --gpus all ')
+                    docker.image('chokchaifa/mlops-test:latest').run('-dit --name ml-opstest01 -d --gpus all ')
                 }
             }
                 
