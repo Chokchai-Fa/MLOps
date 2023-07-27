@@ -49,7 +49,7 @@ pipeline {
         stage('PreProcessing Stage'){
             steps{
                 script{
-                  sh 'docker exec mlops-test01  python3 preprocessing.py'
+                  sh 'docker exec ml-opstest01  python3 preprocessing.py'
                 }
             } 
             }
@@ -59,7 +59,7 @@ pipeline {
         stage('Train Stage'){
             steps{
                 script{
-                  sh 'docker exec mlops-test01  python3 train.py'
+                  sh 'docker exec ml-opstest01  python3 train.py'
                 }
             } 
             }
@@ -67,8 +67,8 @@ pipeline {
         stage('Test Stage'){
         steps{
             script{
-                sh 'docker exec mlops-test01  python3 test.py'
-                sh 'docker exec mlops-test01  cat /results/train_metadata.json /results/test_metadata.json'
+                sh 'docker exec ml-opstest01  python3 test.py'
+                sh 'docker exec ml-opstest01  cat /results/train_metadata.json /results/test_metadata.json'
             }
         } 
         }
