@@ -5,7 +5,7 @@ pipeline {
         stage('Pull Code') {
             steps{
                 dir('src'){
-                     sh 'https://github.com/Chokchai-Fa/MLOps-Project01'
+                     sh 'git clone https://github.com/Chokchai-Fa/MLOps-Project01'
                 }
             }
         }
