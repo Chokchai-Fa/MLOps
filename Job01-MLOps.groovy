@@ -54,7 +54,7 @@ pipeline {
             } 
             }
 
-        }
+        
 
         stage('Train Stage'){
             steps{
