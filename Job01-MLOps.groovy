@@ -39,7 +39,7 @@ pipeline {
                         sh "docker stop ${existingContainerId}"
                         sh "docker rm ${existingContainerId}"
                     }
-                    docker.image('chokchaifa/mlops-test:latest').run('-dit --name mlops-test -d --gplus all ')
+                    docker.image('chokchaifa/mlops-test:latest').run('-dit --name mlops-test -d --gpus all ')
                 }
             }
                 
